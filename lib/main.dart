@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     // ignore: prefer_const_constructors
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'RocknRollOne'), 
+      theme: ThemeData(fontFamily: 'SignikaNegative'), 
       darkTheme: ThemeData.dark(), 
       themeMode: ThemeMode.light,
       home: const Index(),

@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: unnecessary_const
+
 import 'package:flutter/material.dart';
+import 'package:front_mobile/utils/function.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
@@ -9,31 +11,26 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180,
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-          border:
-              Border.all(color: Color.fromARGB(255, 180, 180, 180), width: 1),
-          borderRadius: BorderRadius.circular(15)),
+      width: 150,
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.all(2),
       child: Column(
-        
         children: [
           Stack(
             children: [
               Image.network(
-                'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+                'https://miuzbekistan.com/uploads/1/wwX799yy9lKYHyLirLiPGlzBbpKkFse6.png',
                 fit: BoxFit.cover,
-                width: 175,
-                height: 175,
+                width: 150,
+                height: 150,
               ),
               Positioned(
                   child: Container(
-                margin: EdgeInsets.all(5),
-                padding: EdgeInsets.all(2),
+                margin: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                     color: Colors.red, borderRadius: BorderRadius.circular(2)),
-                child: Text(
+                child: const Text(
                   "Super aksiya",
                   style: TextStyle(
                       fontSize: 12,
@@ -43,27 +40,72 @@ class ProductItem extends StatelessWidget {
               ))
             ],
           ),
-          Divider(),
           Container(
-            margin: EdgeInsets.only(left: 12),
+            height: 105,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-              "Smartfon Samsung Galaxy A32 6GB 128G...",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "999 000 so'm",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            )
+                Expanded(
+                    flex: 2,
+                    child: Column(
+                      children: [
+                        Text(
+                          filterText(
+                              "Симсиз  сичқонча Logitech M650 L Graphite", 35),
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Color.fromRGBO(251, 193, 0, 1),
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Color.fromRGBO(251, 193, 0, 1),
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Color.fromRGBO(251, 193, 0, 1),
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Color.fromRGBO(251, 193, 0, 1),
+                            ),
+                            Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Color.fromRGBO(251, 193, 0, 1),
+                            ),
+                          ],
+                        )
+                      ],
+                    )),
+                Expanded(
+                    flex: 1,
+                    child: const Text(
+                      "331 000 so'm",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w900),
+                    ))
               ],
             ),
           ),
-          
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(251, 193, 0, 1),
+                borderRadius: BorderRadius.circular(7)),
+            child: Text(
+              'Savatchaga',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          )
         ],
       ),
     );

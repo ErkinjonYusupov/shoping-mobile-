@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   carousel_slider: ^4.1.1
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +62,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images
+  # assets:
+  #   - assets/images
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -76,9 +77,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: RocknRollOne
+    - family: SignikaNegative
       fonts:
-        - asset: assets/fonts/RocknRollOne-Regular.ttf
+        - asset: assets/fonts/SignikaNegative-VariableFont_wght.ttf
     
   #
   # For details regarding fonts from package dependencies,
