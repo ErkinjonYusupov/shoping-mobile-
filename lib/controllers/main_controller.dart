@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   bool loading = true;
   List sliders = [];
+  List categories = [];
   fetchSliders() async {
     var isCacheExist =
       await APICacheManager().isAPICacheKeyExist('API_sliders');
@@ -30,6 +31,29 @@ class MainController extends GetxController {
       sliders=json.decode(cacheData.syncData);
       print('slider-CACHE');
       print(sliders);
+      update();
+    }
+  }
+  fetchCategories() async {
+    var isCacheExist =
+      await APICacheManager().isAPICacheKeyExist('API_categories');
+    if (!isCacheExist) {
+      var res = await AllMethods.GET(Apis.categories);
+      if(!res['error']){
+        categories=res['body']['data'];
+      }
+      APICacheDBModel cacheDBModel = new APICacheDBModel(
+          key: 'API_categories', syncData: json.encode(categories));
+      await APICacheManager().addCacheData(cacheDBModel);
+      loading=false;
+      print('categories-NETWORK');
+      print(categories);
+      update();
+    }else{
+      var cacheData=await APICacheManager().getCacheData('API_categories');
+      categories=json.decode(cacheData.syncData);
+      print('categories-CACHE');
+      print(categories);
       update();
     }
   }

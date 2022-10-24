@@ -1,7 +1,9 @@
 class Apis{
   static String http='http://';
-  static String baseUrl='192.168.13.87:8000';
+  static String baseUrl='192.168.13.87:8001';
 
   //apilar
   static String sliders="api/m/sliders"; //slayderlar
+  static String categories="api/m/home/categories"; //home kategoriyalari
+  static String parentCategories="api/m/parent/categories"; //parent kategoriyalari
 }
