@@ -1,8 +1,9 @@
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:front_mobile/components/product_item.dart';
-import 'package:front_mobile/components/products_view.dart';
+import 'package:front_mobile/components/category_products.dart';
+
+
 import 'package:front_mobile/components/universal_widgets.dart';
 import 'package:front_mobile/connection/api.dart';
 import 'package:front_mobile/controllers/home_con.dart';
@@ -107,10 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            ProductItem(),
-                            ProductItem(),
-                            ProductItem(),
-                            ProductItem(),
+                            product(),
+                            
                           ],
                         ),
                       ),
@@ -125,10 +124,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            ProductItem(),
-                            ProductItem(),
-                            ProductItem(),
-                            ProductItem(),
+                            product(),
+                            product(),
+                            product(),
+                            product(),
                           ],
                         ),
                       ),
@@ -137,10 +136,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         alignment: WrapAlignment.center,
                         runSpacing: 15,
                         children: [
-                          ProductItem(),
-                          ProductItem(),
-                          ProductItem(),
-                          ProductItem(),
+                          product(),
+                          product(),
+                          product(),
+                          product(),
                         ],
                       ),
                       SizedBox(height: 30),
@@ -205,7 +204,7 @@ complicatedImage(arr) {
 categoryItem(item) {
   return InkWell(
     onTap: () {
-      Get.to(()=>ProductsView(title:item['title']));
+      Get.to(()=>ProductsView(title:item['title'], categoryId: item['id'].toString(),));
     },
     child: Container(
       width: 100,
