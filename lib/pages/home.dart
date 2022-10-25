@@ -1,12 +1,12 @@
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:front_mobile/components/product_item.dart';
+import 'package:front_mobile/components/products_view.dart';
+import 'package:front_mobile/components/universal_widgets.dart';
 import 'package:front_mobile/connection/api.dart';
 import 'package:front_mobile/controllers/home_con.dart';
 import 'package:front_mobile/controllers/main_controller.dart';
-import 'package:front_mobile/pages/categories.dart';
 import 'package:front_mobile/utils/function.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<Null> refreshList() async {
     await APICacheManager().deleteCache('API_sliders');
     await APICacheManager().deleteCache('API_categories');
+    await APICacheManager().deleteCache('API_parent_categories');
     mainController.fetchSliders();
     mainController.fetchCategories();
     await Future.delayed(Duration(seconds: 2));
@@ -69,11 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               background: Column(
                 children: <Widget>[
-                  InkWell(
-                      onTap: () {
-                        print('object');
-                      },
-                      child: searchWidget())
+                  searchWidget()
                 ],
               ),
             ),
@@ -176,33 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget searchWidget() {
-  return Container(
-    padding: EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      color: Color.fromRGBO(58, 66, 86, 1.0),
-    ),
-    child: Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 1),
-          borderRadius: BorderRadius.circular(25),
-          color: Colors.white),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
-          const Text(
-            'Mahsulotlar qidirish',
-            style: const TextStyle(color: Colors.black),
-          ),
-        ],
-      ),
-    ),
-  );
-}
+
 
 complicatedImage(arr) {
   if (arr.length > 0) {
@@ -232,28 +203,33 @@ complicatedImage(arr) {
 }
 
 categoryItem(item) {
-  return Container(
-    width: 100,
-    padding: EdgeInsets.all(5),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        item['image_url'] != null
-            ? Image.network(
-                Apis.http + Apis.baseUrl + '/' + item['image_url'],
-                fit: BoxFit.cover,
-                width: 80.0,
-                height: 80,
-              )
-            : Container(),
-        SizedBox(
-          height: 5,
-        ),
-        Text(
-          filterText(item['title'], 15),
-          style: TextStyle(fontSize: 10),
-        )
-      ],
+  return InkWell(
+    onTap: () {
+      Get.to(()=>ProductsView(title:item['title']));
+    },
+    child: Container(
+      width: 100,
+      padding: EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          item['image_url'] != null
+              ? Image.network(
+                  Apis.http + Apis.baseUrl + '/' + item['image_url'],
+                  fit: BoxFit.cover,
+                  width: 80.0,
+                  height: 80,
+                )
+              : Container(),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            filterText(item['title'], 15),
+            style: TextStyle(fontSize: 10),
+          )
+        ],
+      ),
     ),
   );
 }

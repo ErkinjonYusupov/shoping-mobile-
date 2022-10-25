@@ -24,13 +24,13 @@ class MainController extends GetxController {
       await APICacheManager().addCacheData(cacheDBModel);
       loading=false;
       print('slider-NETWORK');
-      print(sliders);
+      
       update();
     }else{
       var cacheData=await APICacheManager().getCacheData('API_sliders');
       sliders=json.decode(cacheData.syncData);
       print('slider-CACHE');
-      print(sliders);
+      
       update();
     }
   }
@@ -47,13 +47,11 @@ class MainController extends GetxController {
       await APICacheManager().addCacheData(cacheDBModel);
       loading=false;
       print('categories-NETWORK');
-      print(categories);
       update();
     }else{
       var cacheData=await APICacheManager().getCacheData('API_categories');
       categories=json.decode(cacheData.syncData);
       print('categories-CACHE');
-      print(categories);
       update();
     }
   }
