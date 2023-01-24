@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'ho\'-Shop',
+                      'Shop',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
                     ),
