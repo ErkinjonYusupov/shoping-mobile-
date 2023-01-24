@@ -5,9 +5,9 @@ import 'dart:convert';
 class AllMethods{
   //get
   static Future GET(String url,{Map<String, dynamic>?params})async{
+    try{
     var uri=Uri.http(Apis.baseUrl, url, params);
     var res=await http.get(uri);
-    try{
       if (res.statusCode < 299) {
       return {"error":false,"body":jsonDecode(res.body)};
     }else{
@@ -20,9 +20,9 @@ class AllMethods{
 
   //post
   static Future POST(String url, Map<String, dynamic> body)async{
+    try{
     var uri = Uri.http(Apis.baseUrl, url);
     var res = await http.post(uri, body:body);
-    try{
       if (res.statusCode < 299) {
       return {"error":false,"body":jsonDecode(res.body)};
     }else{
@@ -34,9 +34,9 @@ class AllMethods{
   }
   //put
   static Future PUT(String url, Map<String, dynamic> body, { Map<String, dynamic>? params})async{
+    try{
     var uri = Uri.http(Apis.baseUrl, url, params);
     var res = await http.put(uri, body:body);
-    try{
       if (res.statusCode < 299) {
       return {"error":false,"body":jsonDecode(res.body)};
     }else{
@@ -49,9 +49,9 @@ class AllMethods{
 
   //delete
   static Future DELETE(String url,  {Map<String, dynamic>? params})async{
+    try{
     var uri = Uri.http(Apis.baseUrl, url, params);
     var res = await http.delete(uri);
-    try{
       if (res.statusCode < 299) {
       return {"error":false,"body":jsonDecode(res.body)};
     }else{

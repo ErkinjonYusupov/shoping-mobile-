@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_mobile/languages.dart';
 import 'package:front_mobile/pages/index.dart';
 // import 'package:front/pages/splash_screen.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
     // ignore: prefer_const_constructors
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'SignikaNegative'), 
+      theme: ThemeData(fontFamily: 'SignikaNegative'),
+      translations: Languages(),
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('uz', 'UZ'), 
       darkTheme: ThemeData.dark(), 
       themeMode: ThemeMode.light,
       home: const Index(),

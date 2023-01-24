@@ -1,6 +1,6 @@
 class Apis{
   static String http='http://';
-  static String baseUrl='192.168.13.87:8001';
+  static String baseUrl='192.168.13.157:8001';
 
   //apilar
   static String sliders="api/m/sliders"; //slayderlar
