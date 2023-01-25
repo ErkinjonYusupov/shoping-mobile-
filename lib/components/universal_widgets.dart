@@ -7,25 +7,22 @@ Widget searchWidget() {
       print('to search products');
     },
     child: Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(58, 66, 86, 1.0),
-      ),
+      padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 1),
-            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: Colors.grey, width: 1),
+            borderRadius: BorderRadius.circular(10),
             color: Colors.white),
         child: Row(
           children: [
-            const Icon(
+             Icon(
               Icons.search,
-              color: Colors.black,
-            ),
-            const Text(
+              color: Colors.grey,
+            ),SizedBox(width: 5,),
+             Text(
               'Mahsulotlar qidirish',
-              style: const TextStyle(color: Colors.black),
+              style:  TextStyle(color: Colors.grey),
             ),
           ],
         ),
@@ -81,7 +78,7 @@ Widget product(){
                         ),
                         Row(
                           children: [
-                            Icon(
+                           const Icon(
                               Icons.star,
                               size: 16,
                               color: Color.fromRGBO(251, 193, 0, 1),
