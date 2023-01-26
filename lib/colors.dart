@@ -18,24 +18,22 @@ const mobileChatBoxColor = Color.fromRGBO(31, 44, 52, 1);
 
 class Themes {
   static final light = ThemeData.light().copyWith(
+    accentColor: Color.fromARGB(255, 228, 228, 228),
     backgroundColor: Colors.white,
     buttonColor: Color.fromRGBO(0, 167, 131, 1),
     bottomAppBarColor: Colors.white,
-    appBarTheme:const AppBarTheme(
-      color: Colors.white
-    ),
+    appBarTheme: const AppBarTheme(color: Colors.white),
     buttonTheme: const ButtonThemeData(
       buttonColor: Colors.white,
       textTheme: ButtonTextTheme.primary,
     ),
   );
   static final dark = ThemeData.dark().copyWith(
+    accentColor: Color.fromARGB(244, 34, 49, 57),
     backgroundColor: Color.fromRGBO(19, 28, 33, 1),
     buttonColor: Colors.deepPurple,
     bottomAppBarColor: Color.fromRGBO(31, 44, 52, 1),
-    appBarTheme:const AppBarTheme(
-      color: Color.fromRGBO(19, 28, 33, 1)
-    ),
+    appBarTheme: const AppBarTheme(color: Color.fromRGBO(19, 28, 33, 1)),
     buttonTheme: const ButtonThemeData(
       buttonColor: Color.fromRGBO(31, 44, 52, 1),
       textTheme: ButtonTextTheme.primary,
