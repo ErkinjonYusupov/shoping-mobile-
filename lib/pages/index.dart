@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:front_mobile/controllers/home_con.dart';
 import 'package:get/get.dart';
@@ -11,40 +12,62 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
-  HomePageController controller=Get.put(HomePageController());  
+  HomePageController controller = Get.put(HomePageController());
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child:GetBuilder<HomePageController>(
-        builder: (controller) {
-          return Scaffold(
-            body: controller.choosePage(controller.currentPage),
-            bottomNavigationBar: BottomAppBar(
-              child: Row(
-                children: [
-                  Spacer(),
-              IconButton(onPressed: (){
-                controller.chooseCurrent(0);
-              }, icon: Icon(Icons.home_outlined, color: controller.chooseColor(0), size: 25)),
-              Spacer(),
-              IconButton(onPressed: (){
-                controller.chooseCurrent(1);
-              }, icon: Icon(Icons.category_outlined, color: controller.chooseColor(1), size: 25)),
-              Spacer(),
-              IconButton(onPressed: (){
-                controller.chooseCurrent(2);
-              }, icon: Icon(Icons.shopping_basket_outlined, color: controller.chooseColor(2), size: 25)),
-              Spacer(),
-              IconButton(onPressed: (){
-                controller.chooseCurrent(3);
-              }, icon: Icon(Icons.person_outline_sharp, color: controller.chooseColor(3), size: 25,)),
-              Spacer(),
-                ],
+    return SafeArea(child: GetBuilder<HomePageController>(
+      builder: (controller) {
+        return GetBuilder<HomePageController>(
+          builder: (controller) {
+            return Scaffold(
+              backgroundColor: context.theme.backgroundColor,
+              body: controller.choosePage(controller.currentPage),
+              bottomNavigationBar: BottomAppBar(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(controller.menus.length, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            controller
+                                .chooseCurrent(controller.menus[index]['id']);
+                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                controller.menus[index]['icon'],
+                                color: controller
+                                    .chooseColor(controller.menus[index]['id']),
+                                width: 30,
+                                height: 30,
+                              ),
+                              Text(
+                                  controller.menus[index]['id'] == 1
+                                      ? 'Home'.tr
+                                      : controller.menus[index]['id'] == 2
+                                          ? 'search'.tr
+                                          : controller.menus[index]['id'] == 3
+                                              ? 'cart'.tr
+                                              : controller.menus[index]['id'] ==
+                                                      4
+                                                  ? 'Desire'.tr
+                                                  : 'cobinet'.tr,
+                                  style: TextStyle(
+                                      color: controller.chooseColor(
+                                          controller.menus[index]['id']),
+                                      fontSize: 12))
+                            ],
+                          ),
+                        );
+                      })),
+                ),
               ),
-            ),
-          );
-        },
-      )
-      );
+            );
+          },
+        );
+      },
+    ));
   }
 }

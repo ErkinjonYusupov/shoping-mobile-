@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:front_mobile/components/category_products.dart';
 
-
 import 'package:front_mobile/components/universal_widgets.dart';
 import 'package:front_mobile/connection/api.dart';
 import 'package:front_mobile/controllers/home_con.dart';
@@ -20,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   MainController mainController = Get.put(MainController());
-  HomePageController controller=Get.put(HomePageController());
+  HomePageController controller = Get.put(HomePageController());
 
   void initState() {
     super.initState();
@@ -42,137 +41,99 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: RefreshIndicator(
-      onRefresh: refreshList,
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-            pinned: true,
-            snap: true,
-            floating: true,
-            expandedHeight: 110.0,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Shop',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+            onRefresh: refreshList,
+            child: Column(
+              children: [
+                searchWidget(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        complicatedImage(mainController.sliders),
+                        SectionHeader(
+                            title: "Kategoriyalar",
+                            onTap: () {
+                              controller.chooseCurrent(1);
+                            },
+                            textBtn: 'Barchasini ko\'rish'),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                              children: List.generate(
+                                  mainController.categories.length,
+                                  (index) => categoryItem(
+                                      mainController.categories[index]))),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SectionHeader(
+                            title: "Aksiyalar",
+                            onTap: () {},
+                            textBtn: 'Barchasini ko\'rish'),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              product(),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SectionHeader(
+                            title: "Yangi mahsulotlar",
+                            onTap: () {},
+                            textBtn: 'Barchasini ko\'rish'),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              product(),
+                              product(),
+                              product(),
+                              product(),
+                            ],
+                          ),
+                        ),
+                        Wrap(
+                          spacing: 15,
+                          alignment: WrapAlignment.center,
+                          runSpacing: 15,
+                          children: [
+                            product(),
+                            product(),
+                            product(),
+                            product(),
+                          ],
+                        ),
+                        SizedBox(height: 30),
+                        Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                "Savollaringiz bormi? Qo'ng'iroq qiling",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "+998 (90) 366-60-88",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                      ],
                     ),
-                    Icon(
-                      Icons.shopify,
-                      color: Colors.white,
-                    )
-                  ],
+                  ),
                 ),
-              ),
-              background: Column(
-                children: <Widget>[
-                  searchWidget()
-                ],
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              GetBuilder<MainController>(
-                builder: ((mainController) {
-                  return Column(
-                    children: [
-                      complicatedImage(mainController.sliders),
-                      SectionHeader(
-                          title: "Kategoriyalar",
-                          onTap: () {
-                            controller.chooseCurrent(1);
-                          },
-                          textBtn: 'Barchasini ko\'rish'),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                            children: List.generate(
-                                mainController.categories.length,
-                                (index) => categoryItem(
-                                    mainController.categories[index]))),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SectionHeader(
-                          title: "Aksiyalar",
-                          onTap: () {},
-                          textBtn: 'Barchasini ko\'rish'),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            product(),
-                            
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SectionHeader(
-                          title: "Yangi mahsulotlar",
-                          onTap: () {},
-                          textBtn: 'Barchasini ko\'rish'),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            product(),
-                            product(),
-                            product(),
-                            product(),
-                          ],
-                        ),
-                      ),
-                      Wrap(
-                        spacing: 15,
-                        alignment: WrapAlignment.center,
-                        runSpacing: 15,
-                        children: [
-                          product(),
-                          product(),
-                          product(),
-                          product(),
-                        ],
-                      ),
-                      SizedBox(height: 30),
-                      Center(
-                        child: Column(
-                          children: [
-                            Text(
-                              "Savollaringiz bormi? Qo'ng'iroq qiling",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "+998 (90) 366-60-88",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                    ],
-                  );
-                }),
-              ),
-            ]),
-          ),
-        ],
-      ),
-    ));
+              ],
+            )));
   }
 }
-
-
 
 complicatedImage(arr) {
   if (arr.length > 0) {
@@ -204,7 +165,10 @@ complicatedImage(arr) {
 categoryItem(item) {
   return InkWell(
     onTap: () {
-      Get.to(()=>ProductsView(title:item['title'], categoryId: item['id'].toString(),));
+      Get.to(() => ProductsView(
+            title: item['title'],
+            categoryId: item['id'].toString(),
+          ));
     },
     child: Container(
       width: 100,
