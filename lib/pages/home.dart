@@ -40,67 +40,63 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: context.theme.backgroundColor,
+        appBar: AppBar(
+          backgroundColor: context.theme.backgroundColor,
+          elevation: 0,
+           toolbarHeight: 55,
+          title: searchWidget(),
+          leadingWidth: 0,
+        ),
         body: RefreshIndicator(
-            onRefresh: refreshList,
-            child: Column(
-              children: [
-                searchWidget(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        complicatedImage(mainController.sliders),
-                        SectionHeader(
-                            title: "Kategoriyalar",
-                            onTap: () {
-                              controller.chooseCurrent(1);
-                            },
-                            textBtn: 'Barchasini ko\'rish'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                              children: List.generate(
-                                  mainController.categories.length,
-                                  (index) => categoryItem(
-                                      mainController.categories[index]))),
+          onRefresh: refreshList,
+          child: 
+          Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      complicatedImage(mainController.sliders),
+                      SectionHeader(
+                          title: "Kategoriyalar",
+                          onTap: () {
+                            controller.chooseCurrent(1);
+                          },
+                          textBtn: 'Barchasini ko\'rish'),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                            children: List.generate(
+                                mainController.categories.length,
+                                (index) => categoryItem(
+                                    mainController.categories[index]))),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SectionHeader(
+                          title: "Aksiyalar",
+                          onTap: () {},
+                          textBtn: 'Barchasini ko\'rish'),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            product(),
+                          ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SectionHeader(
-                            title: "Aksiyalar",
-                            onTap: () {},
-                            textBtn: 'Barchasini ko\'rish'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              product(),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SectionHeader(
-                            title: "Yangi mahsulotlar",
-                            onTap: () {},
-                            textBtn: 'Barchasini ko\'rish'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              product(),
-                              product(),
-                              product(),
-                              product(),
-                            ],
-                          ),
-                        ),
-                        Wrap(
-                          spacing: 15,
-                          alignment: WrapAlignment.center,
-                          runSpacing: 15,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SectionHeader(
+                          title: "Yangi mahsulotlar",
+                          onTap: () {},
+                          textBtn: 'Barchasini ko\'rish'),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
                           children: [
                             product(),
                             product(),
@@ -108,30 +104,57 @@ class _HomeScreenState extends State<HomeScreen> {
                             product(),
                           ],
                         ),
-                        SizedBox(height: 30),
-                        Center(
-                          child: Column(
-                            children: [
-                              Text(
-                                "Savollaringiz bormi? Qo'ng'iroq qiling",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "+998 (90) 366-60-88",
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
+                      ),
+                      // Flexible(
+                      //   child: GridView.builder(
+                      //     shrinkWrap: true,
+                      //     gridDelegate:
+                      //         new SliverGridDelegateWithFixedCrossAxisCount(
+                      //       crossAxisCount: 3,
+                      //       childAspectRatio: 1,
+                      //     ),
+                      //     itemCount: 20,
+                      //     itemBuilder: (context, index) {
+                      //       return product();
+                      //     },
+                      //   ),
+                      // ),
+                      Wrap(
+                        spacing: 15,
+                        alignment: WrapAlignment.center,
+                        runSpacing: 15,
+                        children: [
+                          product(),
+                          product(),
+                          product(),
+                          product(),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              "Savollaringiz bormi? Qo'ng'iroq qiling",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "+998 (90) 366-60-88",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
-                        SizedBox(height: 30),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 30),
+                    ],
                   ),
                 ),
-              ],
-            )));
+              ),
+            ],
+          )
+        ));
   }
 }
 
