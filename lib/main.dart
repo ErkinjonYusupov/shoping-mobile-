@@ -6,11 +6,14 @@ import 'package:front_mobile/service/ThemeService.dart';
 // import 'package:front/pages/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 
 void main ()async {
   await GetStorage.init();
+  await Hive.initFlutter();
+  await Hive.openBox("base");
   runApp(const MyApp());
 }
 

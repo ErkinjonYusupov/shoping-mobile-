@@ -14,6 +14,12 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   HomePageController controller = Get.put(HomePageController());
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.currentLocale();
+  }
+  @override
   Widget build(BuildContext context) {
     return SafeArea(child: GetBuilder<HomePageController>(
       builder: (controller) {
