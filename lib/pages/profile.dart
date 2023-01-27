@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:front_mobile/screens/change_language.dart';
 import 'package:front_mobile/service/ThemeService.dart';
 import 'package:get/get.dart';
 
@@ -81,66 +82,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const emptyBody(),
               MenuItem(
                   icon: "assets/images/cart.svg",
-                  title: "Buyurtmalarim",
+                  title: "My_orders".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/comment.svg",
-                  title: "Sharxlarim",
+                  title: "My_comments".tr,
                   onTap: () {},
                   dv: 'false'),
               const emptyBody(),
               MenuItem(
                   icon: "assets/images/percent.svg",
-                  title: "Promokodlarim",
+                  title: "My_promo_codes".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/chat.svg",
-                  title: "Chatlarim",
+                  title: "My_chats".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/bell.svg",
-                  title: "Bildirishnomalar",
+                  title: "Notifications".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/profile.svg",
-                  title: "Profilim",
+                  title: "my_profile".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/settings.svg",
-                  title: "Sozlamalar",
+                  title: "Settings".tr,
                   onTap: () {},
                   dv: 'false'),
               const emptyBody(),
               MenuItem(
                   icon: "assets/images/world.svg",
-                  title: "Ilova tili",
-                  onTap: () {},
+                  title: "_lang".tr,
+                  onTap: () {Get.to(()=>const ChangeLanguage());},
                   dv: 'false'),
               const emptyBody(),
               MenuItem(
                   icon: "assets/images/maps.svg",
-                  title: "Shahar",
+                  title: "City".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/map.svg",
-                  title: "Xaritadagi topshirish punkitlari",
+                  title: "Delivery_points_on_the_map".tr,
                   onTap: () {},
                   dv: 'false'),
               const emptyBody(),
               MenuItem(
                   icon: "assets/images/info.svg",
-                  title: "Ma'lumot",
+                  title: "Information".tr,
                   onTap: () {},
                   dv: 'true'),
               MenuItem(
                   icon: "assets/images/message.svg",
-                  title: "Biz bilan bog'lanish",
+                  title: "contact_us".tr,
                   onTap: () {},
                   dv: 'false'),
               Container(
@@ -161,9 +162,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           onPressed: ThemeService().switchTheme,
-                          child: const Text('Profildan chiqish')),
+                          child:  Text('Log_out_of_profile'.tr)),
                     ),const SizedBox(height: 20,),
-                       const Text("Versiya 1.7.0 (324)")
+                        Text("Version".tr+ " 1.5.2(234)")
                   ],
                 ),
               ),
@@ -205,7 +206,7 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onTap();
       },

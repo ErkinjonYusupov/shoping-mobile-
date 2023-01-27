@@ -8,6 +8,7 @@ import 'package:front_mobile/pages/index.dart';
 import 'package:front_mobile/pages/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:hive/hive.dart';
 
 
 class HomePageController extends GetxController{
@@ -38,5 +39,16 @@ class HomePageController extends GetxController{
       return tabColor;
     }
     return const Color.fromARGB(255, 106, 106, 106);
+  }
+  currentLocale() {
+    var base = Hive.box('base');
+    var lang = base.get('lang');
+    if (lang == 'SingingCharacter.ru') {
+      Get.updateLocale(const Locale('ru', 'RU'));
+    } else if (lang == 'SingingCharacter.en') {
+      Get.updateLocale(const Locale('en', 'US'));
+    } else {
+      Get.updateLocale(const Locale('uz', 'UZ'));
+    }
   }
 } 
