@@ -12,7 +12,7 @@ class MainController extends GetxController {
   List sliders = [];
   List categories = [];
   List categoryProducts = [];
-  fetchSliders() async {
+   fetchSliders() async {
     var isCacheExist =
         await APICacheManager().isAPICacheKeyExist('API_sliders');
     if (!isCacheExist) {
@@ -36,7 +36,7 @@ class MainController extends GetxController {
     }
   }
 
-  fetchCategories() async {
+   fetchCategories() async {
     var isCacheExist =
         await APICacheManager().isAPICacheKeyExist('API_categories');
     if (!isCacheExist) {
@@ -58,7 +58,7 @@ class MainController extends GetxController {
     }
   }
 
-  fetchCategoryProducts(id) async {
+   fetchCategoryProducts(id) async {
     var res = await AllMethods.GET(Apis.categoryProducts,
         params: {'category_id': id});
     if (!res['error']) {

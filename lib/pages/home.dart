@@ -1,4 +1,5 @@
 import 'package:api_cache_manager/api_cache_manager.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:front_mobile/components/category_products.dart';
@@ -20,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   MainController mainController = Get.put(MainController());
   HomePageController controller = Get.put(HomePageController());
 
-  void initState() {
+  void initState() async{
     super.initState();
-    mainController.fetchSliders();
-    mainController.fetchCategories();
+   await mainController.fetchSliders();
+   await mainController.fetchCategories();
   }
 
   Future<Null> refreshList() async {
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: context.theme.backgroundColor,
           elevation: 0,
-          toolbarHeight: 55,
+          // toolbarHeight: 55,
           title: searchWidget(),
           leadingWidth: 0,
         ),
@@ -52,7 +53,40 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  complicatedImage(mainController.sliders),
+                  mainController.sliders.isNotEmpty?
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CarouselSlider.builder(
+                      itemCount: mainController.sliders.length,
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 7),
+                        viewportFraction: 1,
+                        enlargeCenterPage: true,
+                      ),
+                      itemBuilder: (context, index, realIdx) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: CachedNetworkImage(
+                                  imageUrl: Apis.http +
+                                      Apis.baseUrl +
+                                      '/' +
+                                      mainController.sliders[index],
+                                  fit: BoxFit.cover,
+                                  height: 200,
+                                  width: double.infinity,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ):const SizedBox(),
                   SectionHeader(
                       title: "Kategoriyalar",
                       onTap: () {
@@ -115,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Savollaringiz bormi? Qo'ng'iroq qiling",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -128,39 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                 ],
               ),
             )));
   }
 }
 
-complicatedImage(arr) {
-  if (arr.length > 0) {
-    return CarouselSlider.builder(
-      itemCount: arr.length,
-      options: CarouselOptions(
-        autoPlay: true,
-        autoPlayInterval: Duration(seconds: 10),
-        autoPlayAnimationDuration: Duration(milliseconds: 1000),
-        autoPlayCurve: Curves.easeInBack,
-        viewportFraction: 1,
-        enlargeCenterPage: true,
-      ),
-      itemBuilder: (context, index, realIdx) {
-        return Center(
-            child: Image.network(
-          Apis.http + Apis.baseUrl + '/' + arr[index],
-          fit: BoxFit.cover,
-          width: 1000,
-          height: 200,
-        ));
-      },
-    );
-  } else {
-    return Container();
-  }
-}
+
 
 categoryItem(item) {
   return InkWell(
@@ -172,7 +181,7 @@ categoryItem(item) {
     },
     child: Container(
       width: 100,
-      padding:const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -189,7 +198,7 @@ categoryItem(item) {
           ),
           Text(
             item['title'].toString(),
-            style:const TextStyle(fontSize: 10),
+            style: const TextStyle(fontSize: 10),
           )
         ],
       ),
@@ -211,7 +220,7 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
