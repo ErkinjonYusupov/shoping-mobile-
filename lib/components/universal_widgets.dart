@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:front_mobile/utils/function.dart';
+
 
 Widget searchWidget() {
   return InkWell(
@@ -90,8 +90,8 @@ Widget product() {
                   child: Column(
                     children: [
                       Text(
-                        filterText(
-                            "Симсиз  сичқонча Logitech M650 L Graphite", 40),
+                        
+                            "Симсиз  сичқонча Logitech M650 L Graphite",
                         style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.w400),
                       ),
