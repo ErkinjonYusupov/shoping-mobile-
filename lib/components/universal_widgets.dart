@@ -1,28 +1,31 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:front_mobile/utils/function.dart';
+
+
 Widget searchWidget() {
   return InkWell(
     onTap: () {
       print('to search products');
     },
     child: Container(
-      padding:const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white),
+            borderRadius: BorderRadius.circular(20),
+            color: Color.fromARGB(255, 241, 241, 241)),
         child: Row(
           children: [
-             Icon(
+            const Icon(
               Icons.search,
               color: Colors.grey,
-            ),SizedBox(width: 5,),
-             Text(
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
               'Mahsulotlar qidirish',
-              style:  TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],
         ),
@@ -30,104 +33,81 @@ Widget searchWidget() {
     ),
   );
 }
-Widget product(){
+
+Widget product() {
   return Container(
-      width: 150,
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.all(2),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Image.network(
-                'https://miuzbekistan.com/uploads/1/wwX799yy9lKYHyLirLiPGlzBbpKkFse6.png',
-                fit: BoxFit.cover,
-                width: 150,
-                height: 150,
-              ),
-              Positioned(
-                  child: Container(
-                margin: const EdgeInsets.all(5),
-                padding: const EdgeInsets.all(2),
+    width: 150,
+    padding: const EdgeInsets.all(5),
+    margin: const EdgeInsets.all(2),
+    child: Column(
+      children: [
+        Stack(
+          children: [
+            CachedNetworkImage(
+              imageUrl:
+                  'https://images.uzum.uz/cddpe6j5a95unf13aj9g/original.jpg',
+              imageBuilder: (context, imageProvider) => Container(
+                width: 150.0,
+                height: 150.0,
                 decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(2)),
-                child: const Text(
-                  "Super aksiya",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                  borderRadius: BorderRadius.circular(5),
+                  image:
+                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
                 ),
-              ))
+              ),
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+            // Image.network(
+            //   'https://images.uzum.uz/cddpe6j5a95unf13aj9g/original.jpg',
+            //   fit: BoxFit.cover,
+            //   width: 150,
+            //   height: 150,
+            // ),
+            Positioned(
+                child: Container(
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                  color: Colors.red, borderRadius: BorderRadius.circular(2)),
+              child: const Text(
+                "Super aksiya",
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ))
+          ],
+        ),
+        Container(
+          height: 105,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Column(
+                    children: [
+                      Text(
+                        
+                            "Симсиз  сичқонча Logitech M650 L Graphite",
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  )),
+              const Expanded(
+                  flex: 2,
+                  child: const Text(
+                    "331 000 so'm",
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w900),
+                  ))
             ],
           ),
-          Container(
-            height: 105,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    flex: 2,
-                    child: Column(
-                      children: [
-                        Text(
-                          filterText(
-                              "Симсиз  сичқонча Logitech M650 L Graphite", 35),
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                        ),
-                        Row(
-                          children: [
-                           const Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Color.fromRGBO(251, 193, 0, 1),
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Color.fromRGBO(251, 193, 0, 1),
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Color.fromRGBO(251, 193, 0, 1),
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Color.fromRGBO(251, 193, 0, 1),
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Color.fromRGBO(251, 193, 0, 1),
-                            ),
-                          ],
-                        )
-                      ],
-                    )),
-                Expanded(
-                    flex: 1,
-                    child: const Text(
-                      "331 000 so'm",
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w900),
-                    ))
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            decoration: BoxDecoration(
-                color: Color.fromRGBO(251, 193, 0, 1),
-                borderRadius: BorderRadius.circular(7)),
-            child: Text(
-              'Savatchaga',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          )
-        ],
-      ),
-    );
+        ),
+      ],
+    ),
+  );
 }

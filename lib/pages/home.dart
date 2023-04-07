@@ -7,7 +7,6 @@ import 'package:front_mobile/components/universal_widgets.dart';
 import 'package:front_mobile/connection/api.dart';
 import 'package:front_mobile/controllers/home_con.dart';
 import 'package:front_mobile/controllers/main_controller.dart';
-import 'package:front_mobile/utils/function.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,104 +32,105 @@ class _HomeScreenState extends State<HomeScreen> {
     await APICacheManager().deleteCache('API_parent_categories');
     mainController.fetchSliders();
     mainController.fetchCategories();
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: context.theme.backgroundColor,
+        appBar: AppBar(
+          backgroundColor: context.theme.backgroundColor,
+          elevation: 0,
+          toolbarHeight: 55,
+          title: searchWidget(),
+          leadingWidth: 0,
+        ),
         body: RefreshIndicator(
             onRefresh: refreshList,
-            child: Column(
-              children: [
-                searchWidget(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  complicatedImage(mainController.sliders),
+                  SectionHeader(
+                      title: "Kategoriyalar",
+                      onTap: () {
+                        controller.chooseCurrent(1);
+                      },
+                      textBtn: 'Barchasini ko\'rish'),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                        children: List.generate(
+                            mainController.categories.length,
+                            (index) => categoryItem(
+                                mainController.categories[index]))),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SectionHeader(
+                      title: "Aksiyalar",
+                      onTap: () {},
+                      textBtn: 'Barchasini ko\'rish'),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
                       children: [
-                        complicatedImage(mainController.sliders),
-                        SectionHeader(
-                            title: "Kategoriyalar",
-                            onTap: () {
-                              controller.chooseCurrent(1);
-                            },
-                            textBtn: 'Barchasini ko\'rish'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                              children: List.generate(
-                                  mainController.categories.length,
-                                  (index) => categoryItem(
-                                      mainController.categories[index]))),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SectionHeader(
-                            title: "Aksiyalar",
-                            onTap: () {},
-                            textBtn: 'Barchasini ko\'rish'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              product(),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SectionHeader(
-                            title: "Yangi mahsulotlar",
-                            onTap: () {},
-                            textBtn: 'Barchasini ko\'rish'),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              product(),
-                              product(),
-                              product(),
-                              product(),
-                            ],
-                          ),
-                        ),
-                        Wrap(
-                          spacing: 15,
-                          alignment: WrapAlignment.center,
-                          runSpacing: 15,
-                          children: [
-                            product(),
-                            product(),
-                            product(),
-                            product(),
-                          ],
-                        ),
-                        SizedBox(height: 30),
-                        Center(
-                          child: Column(
-                            children: [
-                              Text(
-                                "Savollaringiz bormi? Qo'ng'iroq qiling",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "+998 (90) 366-60-88",
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 30),
+                        product(),
                       ],
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SectionHeader(
+                      title: "Yangi mahsulotlar",
+                      onTap: () {},
+                      textBtn: 'Barchasini ko\'rish'),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        product(),
+                        product(),
+                        product(),
+                        product(),
+                      ],
+                    ),
+                  ),
+                  Wrap(
+                    spacing: 15,
+                    alignment: WrapAlignment.center,
+                    runSpacing: 15,
+                    children: [
+                      product(),
+                      product(),
+                      product(),
+                      product(),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "Savollaringiz bormi? Qo'ng'iroq qiling",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "+998 (90) 366-60-88",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                ],
+              ),
             )));
   }
 }
@@ -172,7 +172,7 @@ categoryItem(item) {
     },
     child: Container(
       width: 100,
-      padding: EdgeInsets.all(5),
+      padding:const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -184,12 +184,12 @@ categoryItem(item) {
                   height: 80,
                 )
               : Container(),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
-            filterText(item['title'], 15),
-            style: TextStyle(fontSize: 10),
+            item['title'].toString(),
+            style:const TextStyle(fontSize: 10),
           )
         ],
       ),
@@ -211,7 +211,7 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin:const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

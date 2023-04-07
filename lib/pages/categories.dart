@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:front_mobile/components/universal_widgets.dart';
 import 'package:front_mobile/controllers/categories_controller.dart';
-
-import 'package:front_mobile/utils/function.dart';
 import 'package:get/get.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -24,18 +21,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kategoriyalar'),
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        title:const Text('Kategoriyalar'),
+        backgroundColor:const Color.fromRGBO(58, 66, 86, 1.0),
       ),
       body: SafeArea(
       child: GetBuilder<CategoriesController>(
         builder: (controller) {
-          return  SingleChildScrollView(
-                child: Column(
-                  children: List.generate(controller.categories.length,
-                      (index) => category(controller.categories[index])),
-                ),
-              );
+          return  Text('categories');
         },
       ),
     ));
