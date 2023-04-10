@@ -21,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   MainController mainController = Get.put(MainController());
   HomePageController controller = Get.put(HomePageController());
 
-  void initState() async{
+  void initState() {
     super.initState();
-   await mainController.fetchSliders();
-   await mainController.fetchCategories();
+    mainController.fetchSliders();
+    mainController.fetchCategories();
   }
 
   Future<Null> refreshList() async {
@@ -39,133 +39,137 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: context.theme.backgroundColor,
-        appBar: AppBar(
+    return GetBuilder<MainController>(
+      builder: (mainController) {
+        return Scaffold(
           backgroundColor: context.theme.backgroundColor,
-          elevation: 0,
-          // toolbarHeight: 55,
-          title: searchWidget(),
-          leadingWidth: 0,
-        ),
-        body: RefreshIndicator(
-            onRefresh: refreshList,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  mainController.sliders.isNotEmpty?
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CarouselSlider.builder(
-                      itemCount: mainController.sliders.length,
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 7),
-                        viewportFraction: 1,
-                        enlargeCenterPage: true,
-                      ),
-                      itemBuilder: (context, index, realIdx) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: CachedNetworkImage(
-                                  imageUrl: Apis.http +
-                                      Apis.baseUrl +
-                                      '/' +
-                                      mainController.sliders[index],
-                                  fit: BoxFit.cover,
-                                  height: 200,
-                                  width: double.infinity,
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ):const SizedBox(),
-                  SectionHeader(
-                      title: "Kategoriyalar",
-                      onTap: () {
-                        controller.chooseCurrent(1);
-                      },
-                      textBtn: 'Barchasini ko\'rish'),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                        children: List.generate(
-                            mainController.categories.length,
-                            (index) => categoryItem(
-                                mainController.categories[index]))),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SectionHeader(
-                      title: "Aksiyalar",
-                      onTap: () {},
-                      textBtn: 'Barchasini ko\'rish'),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        product(),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SectionHeader(
-                      title: "Yangi mahsulotlar",
-                      onTap: () {},
-                      textBtn: 'Barchasini ko\'rish'),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        product(),
-                        product(),
-                        product(),
-                        product(),
-                      ],
-                    ),
-                  ),
-                  Wrap(
-                    spacing: 15,
-                    alignment: WrapAlignment.center,
-                    runSpacing: 15,
-                    children: [
-                      product(),
-                      product(),
-                      product(),
-                      product(),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Savollaringiz bormi? Qo'ng'iroq qiling",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+          appBar: AppBar(
+            backgroundColor: context.theme.backgroundColor,
+            elevation: 0,
+            title: searchWidget(),
+            leadingWidth: 0,
+          ),
+          body: RefreshIndicator(
+              onRefresh: refreshList,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    mainController.sliders.isNotEmpty?
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CarouselSlider.builder(
+                        itemCount: mainController.sliders.length,
+                        options: CarouselOptions(
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 7),
+                          viewportFraction: 1,
+                          enlargeCenterPage: true,
                         ),
-                        Text(
-                          "+998 (90) 366-60-88",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                        )
+                        itemBuilder: (context, index, realIdx) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: Apis.http +
+                                        Apis.baseUrl +
+                                        '/' +
+                                        mainController.sliders[index],
+                                    fit: BoxFit.cover,
+                                    height: 200,
+                                    width: double.infinity,
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ):const SizedBox(),
+                    SectionHeader(
+                        title: "Kategoriyalar",
+                        onTap: () {
+                          controller.chooseCurrent(1);
+                        },
+                        textBtn: 'Barchasini ko\'rish'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: List.generate(
+                              mainController.categories.length,
+                              (index) => categoryItem(
+                                  mainController.categories[index]))),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionHeader(
+                        title: "Aksiyalar",
+                        onTap: () {},
+                        textBtn: 'Barchasini ko\'rish'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          product(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SectionHeader(
+                        title: "Yangi mahsulotlar",
+                        onTap: () {},
+                        textBtn: 'Barchasini ko\'rish'),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          product(),
+                          product(),
+                          product(),
+                          product(),
+                        ],
+                      ),
+                    ),
+                    Wrap(
+                      spacing: 15,
+                      alignment: WrapAlignment.center,
+                      runSpacing: 15,
+                      children: [
+                        product(),
+                        product(),
+                        product(),
+                        product(),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                ],
-              ),
-            )));
+                    const SizedBox(height: 30),
+                    Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Savollaringiz bormi? Qo'ng'iroq qiling",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "+998 (90) 366-60-88",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
+              )));
+      },
+      
+    );
   }
 }
 
