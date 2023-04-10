@@ -4,10 +4,8 @@ import 'package:front_mobile/colors.dart';
 import 'package:front_mobile/pages/cart.dart';
 import 'package:front_mobile/pages/categories.dart';
 import 'package:front_mobile/pages/home.dart';
-import 'package:front_mobile/pages/index.dart';
 import 'package:front_mobile/pages/profile.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:hive/hive.dart';
 
 

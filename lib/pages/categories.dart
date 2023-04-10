@@ -21,13 +21,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Kategoriyalar'),
-        backgroundColor:const Color.fromRGBO(58, 66, 86, 1.0),
-      ),
+            backgroundColor: context.theme.backgroundColor,
+            elevation: 0,
+            title: searchWidget(),
+            leadingWidth: 0,
+          ),
       body: SafeArea(
       child: GetBuilder<CategoriesController>(
         builder: (controller) {
-          return  Text('categories');
+          return const Text('categories');
         },
       ),
     ));

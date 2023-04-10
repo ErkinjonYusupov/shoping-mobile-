@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SectionHeader(
                         title: "Kategoriyalar",
                         onTap: () {
-                          controller.chooseCurrent(1);
+                          controller.chooseCurrent(2);
                         },
                         textBtn: 'Barchasini ko\'rish'),
                     SingleChildScrollView(
