@@ -2,6 +2,7 @@ import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:front_mobile/components/Product.dart';
 import 'package:front_mobile/components/category_products.dart';
 
 import 'package:front_mobile/components/universal_widgets.dart';
@@ -114,6 +115,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         children: [
                           product(),
+                          Product(
+                            product:{
+                              'text':"Симсиз  сичқонча Logitech M650 L Graphite",
+                              'image':'https://images.uzum.uz/cddpe6j5a95unf13aj9g/original.jpg',
+                              'price':'999 999 999',
+                              'month_price':'999 999 999'
+                            }
+                          )
                         ],
                       ),
                     ),

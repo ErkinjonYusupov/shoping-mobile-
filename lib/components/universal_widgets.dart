@@ -8,27 +8,24 @@ Widget searchWidget() {
       print('to search products');
     },
     child: Container(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color.fromARGB(255, 241, 241, 241)),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.search,
-              color: Colors.grey,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Text(
-              'Mahsulotlar qidirish',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color.fromARGB(255, 241, 241, 241)),
+      child: Row(
+        children: const [
+           Icon(
+            Icons.search,
+            color: Colors.grey,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            'Mahsulotlar qidirish',
+            style: TextStyle(color: Colors.grey, fontSize: 14),
+          ),
+        ],
       ),
     ),
   );
