@@ -25,15 +25,12 @@ class MainController extends GetxController {
       await APICacheManager().addCacheData(cacheDBModel);
       loading = false;
       print('slider-NETWORK');
-
-      update();
     } else {
       var cacheData = await APICacheManager().getCacheData('API_sliders');
       sliders = json.decode(cacheData.syncData);
       print('slider-CACHE');
-
-      update();
     }
+    update();
   }
 
    fetchCategories() async {
