@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_mobile/components/universal_widgets.dart';
-import 'package:front_mobile/controllers/categories_controller.dart';
+import 'package:front_mobile/components/snacbar.dart';
+import 'package:front_mobile/dio/controllers/user.dart';
 import 'package:get/get.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -11,10 +11,10 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  CategoriesController controller = Get.put(CategoriesController());
+  UserController controller = Get.put(UserController());
   void initState() {
     super.initState();
-    controller.fetchCategories();
+    controller.fetchUsers();
   }
 
   @override
@@ -25,9 +25,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         backgroundColor:const Color.fromRGBO(58, 66, 86, 1.0),
       ),
       body: SafeArea(
-      child: GetBuilder<CategoriesController>(
+      child: GetBuilder<UserController>(
         builder: (controller) {
-          return  Text('categories');
+          return  SingleChildScrollView(
+            child: Column(
+              children: List.generate(
+                controller.users.length, (index) => 
+                ListTile(
+                  dense: true,
+                  title: Text(controller.users[index].name),
+                  subtitle: Text(controller.users[index].phone),
+                  onTap: () {
+                    customSnackbar(controller.users[index].email, isError: false, title: 'Done');
+                  },
+                )
+                )
+            ),
+          );
         },
       ),
     ));

@@ -7,4 +7,6 @@ class Apis{
   static String categories="api/m/home/categories"; //home kategoriyalari
   static String parentCategories="api/m/parent/categories"; //parent kategoriyalari
   static String categoryProducts="api/m/products"; //parent kategoriyalari
+
+  static String forDio = "https://jsonplaceholder.typicode.com/users"; //dio uchun test placehloder
 }

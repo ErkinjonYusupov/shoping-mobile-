@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:front_mobile/colors.dart';
 import 'package:front_mobile/languages.dart';
 import 'package:front_mobile/pages/index.dart';
@@ -11,6 +12,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 
 void main ()async {
+  await dotenv.load(fileName: ".env");
   await GetStorage.init();
   await Hive.initFlutter();
   await Hive.openBox("base");
