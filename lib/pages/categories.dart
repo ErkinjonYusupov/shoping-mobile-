@@ -20,30 +20,32 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:const Text('Kategoriyalar'),
-        backgroundColor:const Color.fromRGBO(58, 66, 86, 1.0),
-      ),
-      body: SafeArea(
-      child: GetBuilder<UserController>(
-        builder: (controller) {
-          return  SingleChildScrollView(
-            child: Column(
-              children: List.generate(
-                controller.users.length, (index) => 
-                ListTile(
-                  dense: true,
-                  title: Text(controller.users[index].name),
-                  subtitle: Text(controller.users[index].phone),
-                  onTap: () {
-                    customSnackbar(controller.users[index].email, isError: false, title: 'Done');
-                  },
-                )
-                )
-            ),
-          );
-        },
-      ),
-    ));
+        appBar: AppBar(
+          title: const Text('Kategoriyalar'),
+          backgroundColor: const Color.fromRGBO(58, 66, 86, 1.0),
+        ),
+        body: SafeArea(
+          child: GetBuilder<UserController>(
+            builder: (controller) {
+              return SingleChildScrollView(
+                child: Column(
+                    children: List.generate(
+                        controller.users.length,
+                        (index) => ListTile(
+                              dense: true,
+                              title: Text(controller.users[index].name),
+                              subtitle: Text(controller.users[index].phone),
+                              shape:const Border(
+                                bottom: BorderSide(),
+                              ),
+                              onTap: () {
+                                customSnackbar(controller.users[index].email,
+                                    isError: true, title: 'Done');
+                              },
+                            ))),
+              );
+            },
+          ),
+        ));
   }
 }

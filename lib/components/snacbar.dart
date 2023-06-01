@@ -12,7 +12,8 @@ void customSnackbar(String message, {bool isError = true, String title="Errors"}
       ),),
       colorText: Colors.white,
       snackPosition: SnackPosition.TOP,
-      backgroundColor: isError?Colors.redAccent:Colors.green
+      backgroundColor: isError?Colors.redAccent:Colors.green,
+      icon:isError?const Icon(Icons.dangerous, color: Colors.white):const Icon(Icons.done, color: Colors.white),
   );
 
 }
