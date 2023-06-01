@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_mobile/components/snacbar.dart';
 import 'package:front_mobile/dio/controllers/user.dart';
 import 'package:get/get.dart';
 
@@ -35,11 +36,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   title: Text(controller.users[index].name),
                   subtitle: Text(controller.users[index].phone),
                   onTap: () {
-                    Get.snackbar(
-                      "Email",
-                       controller.users[index].email,
-                       backgroundColor:Colors.red
-                       );
+                    customSnackbar(controller.users[index].email, isError: false, title: 'Done');
                   },
                 )
                 )
