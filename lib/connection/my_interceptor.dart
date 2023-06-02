@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MyInterceptor extends Interceptor  {
   MyInterceptor();
-
   @override
   void onError(DioError err, ErrorInterceptorHandler handler){
     if (err.response?.statusCode == 401) {

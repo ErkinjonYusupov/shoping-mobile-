@@ -20,7 +20,7 @@ class UserController extends GetxController {
   }
   void addUser() async {
     try {
-      var data = await dio.post('/users');
+      var data = await dio.post('/users1');
       users = userFromMap(data.data);
       update();
     } catch (error) {
